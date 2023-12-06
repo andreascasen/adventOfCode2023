@@ -1,9 +1,20 @@
 import { readFile } from '../lib/fileSystem.js'
+import { newGetCalibrationValueFromString } from './day1.lib.js'
+
+/**
+ * RESULTS
+ * Part 1 - 54390
+ * Part 2 - 
+ */
+
+const getInputArray = async (fileName) => {
+	const input = await readFile(fileName)
+	return input.split('\n')
+} 
 
 const part1 = async () => {
-	const input = await readFile('./inputs/day1.txt')
-	const inputArray = input.split('\n')
-	const calibrationValue = inputArray.reduce((acc, curr) => {
+	const input = await getInputArray('./inputs/day1.txt')
+	const calibrationValue = input.reduce((acc, curr) => {
 		const currentCalibrationInput = getCalibrationValueFromString(curr)
 		return acc + currentCalibrationInput
 	}, 0)
@@ -18,4 +29,18 @@ const getCalibrationValueFromString = (singleString) => {
 	return parseInt(calibrationValue)
 }
 
-part1() // 54390
+
+/** PART 2 */
+const part2 = async () => {
+	const input = await getInputArray('./inputs/day1.txt')
+	const newCalibrationValues = input.reduce((acc, curr) => {
+		const currentCalibrationInput = newGetCalibrationValueFromString(curr)
+		return acc + currentCalibrationInput
+	}, 0)
+
+	console.log({ newCalibrationValues })
+}
+
+
+// const dayOneFirstResult = await part1() // 54390
+const dayOneSecondResult = await part2()
